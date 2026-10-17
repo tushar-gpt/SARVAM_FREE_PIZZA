@@ -1,0 +1,5 @@
+streamlit>=1.41
+requests
+pandas
+sarvamai
+pydub
