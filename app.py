@@ -49,21 +49,36 @@ LEVELS = {1: "Easy", 2: "Basic", 3: "Medium", 4: "Hard", 5: "Very tough"}
 
 st.set_page_config(page_title="Saathi", page_icon="📚", layout="wide")
 st.markdown("""<style>
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap');
-html, body, [class*="css"], .stMarkdown, button, input, textarea { font-family: 'Baloo 2', system-ui, sans-serif !important; }
-.hero { background: linear-gradient(120deg,#3b2fc9,#7b3fe4 55%,#ff9f1c); border-radius: 22px; padding: 22px 28px;
-        color: #fff; margin-bottom: 8px; animation: pop .6s ease-out; }
-.hero h1 { font-size: 2.6rem; margin: 0; font-weight: 800; color: #fff; }
-.hero p { margin: 2px 0 0; font-size: 1.15rem; opacity: .95; }
-@keyframes pop { from { transform: scale(.96); opacity: 0 } to { transform: scale(1); opacity: 1 } }
-.stTabs [data-baseweb="tab"] { font-size: 1.05rem; font-weight: 700; border-radius: 999px; padding: 6px 16px; }
-.stTabs [aria-selected="true"] { background: #ffefd6; color: #3b2fc9 !important; }
-.stButton > button { border-radius: 999px; font-weight: 700; transition: transform .12s; }
-.stButton > button:hover { transform: translateY(-2px) scale(1.03); }
-.stButton > button:active { transform: scale(.97); }
-[data-testid="stChatMessage"] { border-radius: 18px; animation: pop .35s ease-out; }
-.stProgress > div > div > div > div { background: linear-gradient(90deg,#ff9f1c,#7b3fe4) !important; }
-.chip { display:inline-block; background:#ffefd6; color:#3b2fc9; border-radius:999px; padding:2px 12px; font-weight:700; margin-right:6px; }
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Baloo+2:wght@500;700&display=swap');
+html, body, [class*="css"], .stMarkdown, button, input, textarea { font-family: 'Bricolage Grotesque','Baloo 2',system-ui,sans-serif !important; }
+.stApp { background: radial-gradient(circle at 10% 10%, #3b1d8f55, transparent 40%), radial-gradient(circle at 90% 20%, #ff4ecd33, transparent 40%),
+         radial-gradient(circle at 50% 100%, #22d3ee22, transparent 50%), #0f0a24; background-attachment: fixed; }
+.hero { position: relative; overflow: hidden; border-radius: 28px; padding: 30px 32px; margin-bottom: 12px;
+        background: linear-gradient(120deg,#7c3aed,#ff4ecd,#ffb020,#22d3ee,#7c3aed); background-size: 300% 300%;
+        animation: flow 10s ease infinite; box-shadow: 0 0 40px #ff4ecd55; }
+.hero h1 { font-size: 3.2rem; margin: 0; font-weight: 800; color: #fff; letter-spacing: -1px; text-shadow: 3px 3px 0 #0f0a24; }
+.hero p { margin: 4px 0 0; font-size: 1.2rem; color: #fff; font-weight: 700; }
+.hero .sticker { position: absolute; right: 26px; top: 22px; background: #0f0a24; color: #ffb020; padding: 6px 14px;
+        border-radius: 999px; font-weight: 800; transform: rotate(6deg); animation: wobble 2.5s ease-in-out infinite; }
+@keyframes flow { 0%,100% { background-position: 0% 50% } 50% { background-position: 100% 50% } }
+@keyframes wobble { 0%,100% { transform: rotate(6deg) } 50% { transform: rotate(-4deg) scale(1.06) } }
+@keyframes pop { from { transform: translateY(8px) scale(.97); opacity: 0 } to { transform: none; opacity: 1 } }
+.stTabs [data-baseweb="tab-list"] { gap: 8px; background: #ffffff0d; padding: 6px; border-radius: 999px; backdrop-filter: blur(10px); }
+.stTabs [data-baseweb="tab"] { font-weight: 700; font-size: 1.02rem; border-radius: 999px; padding: 6px 18px; }
+.stTabs [aria-selected="true"] { background: linear-gradient(90deg,#7c3aed,#ff4ecd); color: #fff !important; box-shadow: 0 0 18px #ff4ecd88; }
+.stTabs [data-baseweb="tab-highlight"], .stTabs [data-baseweb="tab-border"] { display: none; }
+.stButton > button { border-radius: 14px; font-weight: 800; border: 2px solid #ff4ecd; background: #1b1440;
+        box-shadow: 4px 4px 0 #ff4ecd; transition: transform .12s, box-shadow .12s; }
+.stButton > button:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #22d3ee; border-color: #22d3ee; }
+.stButton > button:active { transform: translate(3px,3px); box-shadow: 0 0 0; }
+.stButton > button[kind="primary"] { background: linear-gradient(90deg,#7c3aed,#ff4ecd); color: #fff; border-color: #fff; box-shadow: 4px 4px 0 #ffb020; }
+[data-testid="stChatMessage"], [data-testid="stExpander"], [data-testid="stMetric"], [data-testid="stAudioInput"] {
+        background: #ffffff0f; border: 1px solid #ffffff1f; border-radius: 20px; backdrop-filter: blur(12px); animation: pop .35s ease-out; }
+[data-testid="stMetric"] { padding: 14px 18px; }
+[data-testid="stMetricValue"] { background: linear-gradient(90deg,#ffb020,#ff4ecd); -webkit-background-clip: text; color: transparent; font-weight: 800; }
+.stProgress > div > div > div > div { background: linear-gradient(90deg,#22d3ee,#7c3aed,#ff4ecd) !important; box-shadow: 0 0 12px #ff4ecd; }
+.stTextInput input, .stTextArea textarea { border-radius: 14px !important; }
+.chip { display:inline-block; background:#ffb020; color:#0f0a24; border-radius:999px; padding:3px 14px; font-weight:800; margin-right:6px; transform: rotate(-2deg); }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>""", unsafe_allow_html=True)
 
@@ -447,7 +462,7 @@ def render_feedback(fb, holder):
 
 
 # ----------------------------------------------------------------------------- page
-st.markdown('<div class="hero"><h1>📚 Saathi</h1><p>Samjho. Samjhao. Parkho. Your study buddy, in your language.</p></div>',
+st.markdown('<div class="hero"><span class="sticker">study mode: ON ⚡</span><h1>Saathi ✦</h1><p>samjho → samjhao → parkho. lectures decoded, in your language 🫶</p></div>',
             unsafe_allow_html=True)
 
 
